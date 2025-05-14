@@ -1,0 +1,24 @@
+# Entorno
+venv/
+
+# Archivos de Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# IDE o editores
+*.swp
+*.swo
+*.bak
+*.tmp
+*.orig
+*.log
+.vscode/
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
