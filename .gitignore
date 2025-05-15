@@ -5,6 +5,7 @@ venv/
 __pycache__/
 *.py[cod]
 *$py.class
+*.log
 
 # IDE o editores
 *.swp
@@ -22,3 +23,7 @@ __pycache__/
 # Archivos de sistema
 .DS_Store
 Thumbs.db
+
+# Bases de datos
+*.sqlite3
+*.db
