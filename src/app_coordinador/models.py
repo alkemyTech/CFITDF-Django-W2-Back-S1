@@ -10,4 +10,4 @@ class Coordinador(models.Model):
     activo = models.BooleanField(default=True)
 
     def __str__(self):
-        return f"{self.nombre} {self.apellido} - {self.numero_documento}"
+        return f"{self.nombre} {self.apellido} - DNI: {self.numero_documento}"
