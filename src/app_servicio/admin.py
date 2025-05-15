@@ -6,3 +6,4 @@ class ServicioAdmin(admin.ModelAdmin):
     list_display = ('nombre', 'descripcion', 'precio', 'activo')
     search_fields = ('nombre',)
     ordering = ('nombre',)
+    
