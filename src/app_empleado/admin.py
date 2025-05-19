@@ -4,6 +4,8 @@ from .models import Empleado
 @admin.register(Empleado)
 class EmpleadoAdmin(admin.ModelAdmin):
     list_display = ('nombre', 'apellido', 'legajo', 'activo')
+    list_filter = ('activo',)
+    actions = ['dar_de_baja', 'dar_de_alta']
     search_fields = ('nombre', 'apellido')
     ordering = ('apellido', 'nombre')
     
