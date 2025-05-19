@@ -11,3 +11,7 @@ class Coordinador(models.Model):
 
     def __str__(self):
         return f"{self.nombre} {self.apellido} - DNI: {self.numero_documento}"
+    
+    class Meta:
+        verbose_name = "Coordinador"
+        verbose_name_plural = "Coordinadores"
