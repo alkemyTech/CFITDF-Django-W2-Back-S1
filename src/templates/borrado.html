@@ -1,0 +1,10 @@
+{% block titulo %}Por favor, confirme el borrado{% endblock titulo %}
+
+{% block contenido %}
+    <p>¿Estás seguro de que quieres eliminar "{{ object }}"?</p>
+
+    <form method="post">{% csrf_token %}
+        <button type="submit">Borrar</button>
+        <a href="{{ success_url }}">Cancelar</a>
+    </form>
+{% endblock contenido %}
