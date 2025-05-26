@@ -21,12 +21,12 @@ class ClienteUpdateView(UpdateView):
     template_name = 'update.html'
 
     def get_success_url(self):
-        return reverse_lazy('app_cliente:cliente_update', 
-                            kwargs={'pk': self.object.pk})
+        return reverse_lazy('app_cliente:cliente_update', kwargs={'pk': self.object.pk})
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['model_name'] = 'cliente'
+        return context
       
 class ClienteListView(ListView):
     model = Cliente
@@ -40,6 +40,7 @@ class ClienteListView(ListView):
         context["valores_campos"] = [
             [getattr(obj, campo.name) for campo in Cliente._meta.fields]
             for obj in context["objetos"]
+        ]
         return context
           
 class ClienteDeleteView(DeleteView):
