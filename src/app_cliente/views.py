@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import CreateView, UpdateView, ListView
+from django.views.generic import CreateView, UpdateView, ListView, DeleteView
 from django.urls import reverse_lazy
 from .models import Cliente
 
@@ -40,4 +40,14 @@ class ClienteListView(ListView):
         context["valores_campos"] = [
             [getattr(obj, campo.name) for campo in Cliente._meta.fields]
             for obj in context["objetos"]
+        return context
+          
+class ClienteDeleteView(DeleteView):
+    model = Cliente
+    template_name = "borrado.html"
+    success_url = reverse_lazy("app_cliente:cliente_lista")
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["success_url"] = self.success_url
         return context
