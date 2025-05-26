@@ -1,7 +1,8 @@
 from django.shortcuts import render
-from django.views.generic import CreateView, ListView
+from django.views.generic import CreateView, UpdateView, ListView
 from django.urls import reverse_lazy
 from .models import Cliente
+
 
 class ClienteCreateView(CreateView):
     model = Cliente
@@ -13,6 +14,19 @@ class ClienteCreateView(CreateView):
         context = super().get_context_data(**kwargs)
         context['model_name'] = 'nuevo cliente'
         return context
+
+class ClienteUpdateView(UpdateView):
+    model = Cliente
+    fields = ['nombre', 'apellido']
+    template_name = 'update.html'
+
+    def get_success_url(self):
+        return reverse_lazy('app_cliente:cliente_update', 
+                            kwargs={'pk': self.object.pk})
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['model_name'] = 'cliente'
       
 class ClienteListView(ListView):
     model = Cliente
@@ -26,5 +40,4 @@ class ClienteListView(ListView):
         context["valores_campos"] = [
             [getattr(obj, campo.name) for campo in Cliente._meta.fields]
             for obj in context["objetos"]
-        ]
         return context
