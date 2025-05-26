@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import CreateView, ListView
+from django.views.generic import CreateView, ListView, UpdateView
 from django.urls import reverse_lazy
 from .models import ReservaServicio
 
@@ -29,4 +29,18 @@ class ReservaServicioListView(ListView):
             for obj in context["objetos"]
         ]
         return context
-    
+
+
+class ReservaServicioUpdateView(UpdateView):
+    model = ReservaServicio
+    fields = ['fecha_evento','cliente','servicio','empleado','coordinador']
+    template_name = 'update.html'
+
+    def get_success_url(self):
+        return reverse_lazy('app_reservaservicio:reserva_update', kwargs={'pk': self.object.pk})
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['model_name'] = 'reserva'
+        return context
+ 
