@@ -1,7 +1,8 @@
 from django.shortcuts import render
-from django.views.generic import CreateView, ListView
+from django.views.generic import CreateView, ListView, UpdateView
 from django.urls import reverse_lazy
 from .models import Empleado
+
 
 class EmpleadoCreateView(CreateView):
     model = Empleado
@@ -27,4 +28,17 @@ class EmpleadoListView(ListView):
             [getattr(obj, campo.name) for campo in Empleado._meta.fields]
             for obj in context["objetos"]
         ]
+        return context
+    
+class EmpleadoUpdateView(UpdateView):
+    model = Empleado
+    fields = ['nombre', 'apellido','legajo']
+    template_name = 'update.html'
+
+    def get_success_url(self):
+        return reverse_lazy('app_empleado:empleado_update', kwargs={'pk': self.object.pk})
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['model_name'] = 'empleado'
         return context
