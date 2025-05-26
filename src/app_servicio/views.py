@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import CreateView, ListView
+from django.views.generic import CreateView, ListView, UpdateView
 from django.urls import reverse_lazy
 from .models import Servicio
 
@@ -27,4 +27,17 @@ class ServicioListView(ListView):
             [getattr(obj, campo.name) for campo in Servicio._meta.fields]
             for obj in context["objetos"]
         ]
+        return context
+    
+class ServicioUpdateView(UpdateView):
+    model = Servicio
+    fields = ['nombre', 'descripcion', 'precio']
+    template_name = 'update.html'
+
+    def get_success_url(self):
+        return reverse_lazy('app_servicio:servicio_update', kwargs={'pk': self.object.pk})
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['model_name'] = 'servicio'
         return context
