@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import CreateView, ListView, UpdateView
+from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .models import Empleado
 
@@ -41,4 +41,14 @@ class EmpleadoUpdateView(UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['model_name'] = 'empleado'
+        return context
+    
+class EmpleadoDeleteView(DeleteView):
+    model = Empleado
+    template_name = "borrado.html"
+    success_url = reverse_lazy("app_empleado:empleado_lista")
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["success_url"] = self.success_url
         return context
