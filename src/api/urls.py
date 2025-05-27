@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import ServicioListaAPIView, ServicioRetrieveAPIView, ClienteListaAPIView, ClienteRetrieveAPIView, EmpleadoListaAPIView, EmpleadoRetrieveAPIView
+from .views import ServicioListaAPIView, ServicioRetrieveAPIView, ClienteListaAPIView, ClienteRetrieveAPIView, EmpleadoListaAPIView, EmpleadoRetrieveAPIView, CoordinadorListaAPIView
 
 urlpatterns = [
     path('servicios/', ServicioListaAPIView.as_view(),
@@ -12,4 +12,5 @@ urlpatterns = [
     path('empleados/', EmpleadoListaAPIView.as_view(), name='api_empleados_lista'),
     path('empleados/<int:pk>', EmpleadoRetrieveAPIView.as_view(), 
          name='api_empleados_detalle'),
+    path('coordinadores/', CoordinadorListaAPIView.as_view(), name='api_coordinadores_lista'),
 ]
