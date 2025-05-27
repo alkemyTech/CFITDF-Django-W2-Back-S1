@@ -32,3 +32,7 @@ class EmpleadoListaAPIView(APIView):
         nombres_apellidos = list(Empleado.objects.filter(
             activo=True).values_list('nombre', 'apellido'))
         return Response(nombres_apellidos)
+    
+class EmpleadoRetrieveAPIView(RetrieveAPIView):
+    queryset = Empleado.objects.all()
+    serializer_class = EmpleadoSerializer
