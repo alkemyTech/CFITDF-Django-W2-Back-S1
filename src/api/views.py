@@ -43,3 +43,7 @@ class CoordinadorListaAPIView(APIView):
         nombres_apellidos = list(Coordinador.objects.filter(
             activo=True).values_list('nombre', 'apellido'))
         return Response(nombres_apellidos)
+    
+class CoordinadorRetrieveAPIView(RetrieveAPIView):
+    queryset = Coordinador.objects.all()
+    serializer_class = CoordinadorSerializer
