@@ -5,7 +5,8 @@ from rest_framework.response import Response
 from app_servicio.models import Servicio
 from app_cliente.models import Cliente
 from app_empleado.models import Empleado
-from .serializers import ServicioSerializer, ClienteSerializer, EmpleadoSerializer
+from app_coordinador.models import Coordinador
+from .serializers import ServicioSerializer, ClienteSerializer, EmpleadoSerializer, CoordinadorSerializer
 
 class ServicioListaAPIView(APIView):
     def get(self, request):
@@ -36,3 +37,9 @@ class EmpleadoListaAPIView(APIView):
 class EmpleadoRetrieveAPIView(RetrieveAPIView):
     queryset = Empleado.objects.all()
     serializer_class = EmpleadoSerializer
+    
+class CoordinadorListaAPIView(APIView):
+    def get(self, request):
+        nombres_apellidos = list(Coordinador.objects.filter(
+            activo=True).values_list('nombre', 'apellido'))
+        return Response(nombres_apellidos)
