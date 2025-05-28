@@ -20,5 +20,5 @@ class Coordinador(models.Model):
         return f"{self.nombre} {self.apellido} - DNI: {self.numero_documento}"
 
     class Meta:
-        verbose_name = "Coordinador"
-        verbose_name_plural = "Coordinadores"
+        verbose_name = "coordinador"
+        verbose_name_plural = "coordinadores"
