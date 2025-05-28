@@ -1,6 +1,5 @@
 from django.db import models
 
-# Create your models here.
 
 class EmpleadoManager(models.Manager):
     def get_queryset(self):
@@ -15,11 +14,14 @@ class Empleado(models.Model):
 
     objects = EmpleadoManager()
     all_objects = models.Manager()
-    
+
     def delete(self, using=None, keep_parents=False):
         self.activo = False
         self.save()
-    
+
     def __str__(self):
-        return f'{self.nombre} {self.apellido} - Legajo: {self.legajo} - Activo: {self.activo}'
-    
+        return (
+            f"{self.nombre} {self.apellido} - "
+            f"Legajo: {self.legajo} - "
+            f"Activo: {self.activo}"
+        )

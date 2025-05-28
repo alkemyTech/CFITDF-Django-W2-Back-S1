@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import Servicio
 
+
 @admin.register(Servicio)
 class ServicioAdmin(admin.ModelAdmin):
     list_display = ('nombre', 'descripcion', 'precio', 'activo')
@@ -8,7 +9,7 @@ class ServicioAdmin(admin.ModelAdmin):
     actions = ['dar_de_baja', 'dar_de_alta']
     search_fields = ('nombre',)
     ordering = ('nombre',)
-    
+
     def get_queryset(self, request):
         return Servicio.all_objects.all()
 

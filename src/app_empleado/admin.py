@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import Empleado
 
+
 @admin.register(Empleado)
 class EmpleadoAdmin(admin.ModelAdmin):
     list_display = ('nombre', 'apellido', 'legajo', 'activo')
@@ -8,7 +9,7 @@ class EmpleadoAdmin(admin.ModelAdmin):
     actions = ['dar_de_baja', 'dar_de_alta']
     search_fields = ('nombre', 'apellido')
     ordering = ('apellido', 'nombre')
-    
+
     def get_queryset(self, request):
         return Empleado.all_objects.all()
 

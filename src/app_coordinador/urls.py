@@ -1,5 +1,8 @@
 from django.urls import path
-from .views import CoordinadorCreateView, CoordinadorListView, CoordinadorUpdateView, CoordinadorDeleteView
+from .views import (
+    CoordinadorCreateView, CoordinadorListView, 
+    CoordinadorUpdateView, CoordinadorDeleteView
+)
 
 app_name = "app_coordinador"
 
