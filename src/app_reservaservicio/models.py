@@ -32,8 +32,12 @@ class ReservaServicio(models.Model):
     )
 
     def __str__(self):
-        return f"Reserva de {self.cliente} para {self.servicio} el {self.fecha_evento.strftime('%Y-%m-%d')}"
+        return (
+            f"Reserva de {self.cliente} para {self.servicio} "
+            f"el {self.fecha_evento.strftime('%Y-%m-%d')}"
+        )
 
-    class Meta:
-        verbose_name = "Reserva de servicios"
-        verbose_name_plural = "Reserva de servicios"
+
+class Meta:
+    verbose_name = "Reserva de servicios"
+    verbose_name_plural = "Reserva de servicios"
