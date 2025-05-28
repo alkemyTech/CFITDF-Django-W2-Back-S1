@@ -20,4 +20,8 @@ class Empleado(models.Model):
         self.save()
 
     def __str__(self):
-        return f'{self.nombre} {self.apellido} - Legajo: {self.legajo} - Activo: {self.activo}'
+        return (
+            f"{self.nombre} {self.apellido} - "
+            f"Legajo: {self.legajo} - "
+            f"Activo: {self.activo}"
+        )
