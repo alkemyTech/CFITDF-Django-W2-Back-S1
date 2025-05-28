@@ -15,6 +15,7 @@ class ClienteCreateView(CreateView):
         context['model_name'] = 'nuevo cliente'
         return context
 
+
 class ClienteUpdateView(UpdateView):
     model = Cliente
     fields = ['nombre', 'apellido']
@@ -27,27 +28,30 @@ class ClienteUpdateView(UpdateView):
         context = super().get_context_data(**kwargs)
         context['model_name'] = 'cliente'
         return context
-      
+
+
 class ClienteListView(ListView):
     model = Cliente
     template_name = "lista_generica.html"
-    context_object_name = "objetos" 
+    context_object_name = "objetos"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["titulo"] = "Clientes"
-        context["encabezados_campos"] = [campo.verbose_name for campo in Cliente._meta.fields] 
+        context["encabezados_campos"] = [
+            campo.verbose_name for campo in Cliente._meta.fields]
         context["valores_campos"] = [
             [getattr(obj, campo.name) for campo in Cliente._meta.fields]
             for obj in context["objetos"]
         ]
         return context
-          
+
+
 class ClienteDeleteView(DeleteView):
     model = Cliente
     template_name = "borrado.html"
     success_url = reverse_lazy("app_cliente:cliente_lista")
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["success_url"] = self.success_url

@@ -1,6 +1,5 @@
 from django.db import models
 
-# Create your models here.
 
 class ServicioManager(models.Manager):
     def get_queryset(self):
@@ -22,4 +21,3 @@ class Servicio(models.Model):
 
     def __str__(self):
         return f'{self.nombre}: {self.descripcion}, {self.precio}'
-
