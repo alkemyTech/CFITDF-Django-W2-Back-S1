@@ -7,54 +7,56 @@ from app_cliente.models import Cliente
 from app_empleado.models import Empleado
 from app_coordinador.models import Coordinador
 from .serializers import (
-    ServicioSerializer, ClienteSerializer,
-    EmpleadoSerializer, CoordinadorSerializer
+    ServicioListaSerializer, ServicioDetalleSerializer,
+    ClienteListaSerializer, ClienteDetalleSerializer, 
+    EmpleadoListaSerializer, EmpleadoDetalleSerializer,
+    CoordinadorListaSerializer, CoordinadorDetalleSerializer
 )
 
 
 class ServicioListaAPIView(APIView):
     def get(self, request):
-        nombres = list(Servicio.objects.filter(
-            activo=True).values_list('nombre', flat=True))
-        return Response(nombres)
+        servicios = Servicio.objects.filter(activo=True)
+        serializer = ServicioListaSerializer(servicios, many=True)
+        return Response(serializer.data)
 
 
 class ServicioRetrieveAPIView(RetrieveAPIView):
     queryset = Servicio.objects.all()
-    serializer_class = ServicioSerializer
+    serializer_class = ServicioDetalleSerializer
 
 
 class ClienteListaAPIView(APIView):
     def get(self, request):
-        nombres_apellidos = list(Cliente.objects.filter(
-            activo=True).values_list('nombre', 'apellido'))
-        return Response(nombres_apellidos)
+        clientes = Cliente.objects.filter(activo=True)
+        serializer = ClienteListaSerializer(clientes, many=True)
+        return Response(serializer.data)
 
 
 class ClienteRetrieveAPIView(RetrieveAPIView):
     queryset = Cliente.objects.all()
-    serializer_class = ClienteSerializer
+    serializer_class = ClienteDetalleSerializer
 
 
 class EmpleadoListaAPIView(APIView):
     def get(self, request):
-        nombres_apellidos = list(Empleado.objects.filter(
-            activo=True).values_list('nombre', 'apellido'))
-        return Response(nombres_apellidos)
+        empleados = Empleado.objects.filter(activo=True)
+        serializer = EmpleadoListaSerializer(empleados, many=True)
+        return Response(serializer.data)
 
 
 class EmpleadoRetrieveAPIView(RetrieveAPIView):
     queryset = Empleado.objects.all()
-    serializer_class = EmpleadoSerializer
+    serializer_class = EmpleadoDetalleSerializer
 
 
 class CoordinadorListaAPIView(APIView):
     def get(self, request):
-        nombres_apellidos = list(Coordinador.objects.filter(
-            activo=True).values_list('nombre', 'apellido'))
-        return Response(nombres_apellidos)
+        coordinadores = Coordinador.objects.filter(activo=True)
+        serializer = CoordinadorListaSerializer(coordinadores, many=True)
+        return Response(serializer.data)
 
 
 class CoordinadorRetrieveAPIView(RetrieveAPIView):
     queryset = Coordinador.objects.all()
-    serializer_class = CoordinadorSerializer
+    serializer_class = CoordinadorDetalleSerializer
