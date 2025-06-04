@@ -1,5 +1,8 @@
 from django.shortcuts import render
-from django.views.generic import CreateView, ListView, UpdateView, DeleteView
+from django.views.generic import (
+    CreateView, ListView, UpdateView,
+    DeleteView, DetailView
+)
 from django.urls import reverse_lazy
 from .models import ReservaServicio
 
@@ -57,4 +60,19 @@ class ReservaServicioDeleteView(DeleteView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["success_url"] = self.success_url
+        return context
+
+
+class ReservaServicioDetailView(DetailView):
+    model = ReservaServicio
+    template_name = 'details.html'
+    context_object_name = 'objeto'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["model_name"] = "reserva"
+        context["campos"] = [
+            (field.verbose_name, getattr(self.object, field.name))
+            for field in self.model._meta.fields
+        ]
         return context
