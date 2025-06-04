@@ -18,8 +18,11 @@ class ClienteCreateView(CreateView):
 
 class ClienteUpdateView(UpdateView):
     model = Cliente
-    fields = ['nombre', 'apellido']
+    fields = ['nombre', 'apellido', 'activo']
     template_name = 'update.html'
+
+    def get_queryset(self):
+        return Cliente.all_objects.all()
 
     def get_success_url(self):
         return reverse_lazy('app_cliente:cliente_update',

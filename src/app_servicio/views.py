@@ -35,8 +35,11 @@ class ServicioListView(ListView):
 
 class ServicioUpdateView(UpdateView):
     model = Servicio
-    fields = ['nombre', 'descripcion', 'precio']
+    fields = ['nombre', 'descripcion', 'precio', 'activo']
     template_name = 'update.html'
+
+    def get_queryset(self):
+        return Servicio.all_objects.all()
 
     def get_success_url(self):
         return reverse_lazy('app_servicio:servicio_update',
