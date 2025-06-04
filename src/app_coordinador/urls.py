@@ -1,7 +1,8 @@
 from django.urls import path
 from .views import (
     CoordinadorCreateView, CoordinadorListView, 
-    CoordinadorUpdateView, CoordinadorDeleteView
+    CoordinadorUpdateView, CoordinadorDeleteView,
+    CoordinadorDetailView
 )
 
 app_name = "app_coordinador"
@@ -11,6 +12,8 @@ urlpatterns = [
     path('', CoordinadorListView.as_view(), name='coordinador_lista'),
     path('editar/<int:pk>/', CoordinadorUpdateView.as_view(),
          name='coordinador_update'),
-    path("borrar/<int:pk>/", CoordinadorDeleteView.as_view(),
+    path('borrar/<int:pk>/', CoordinadorDeleteView.as_view(),
          name="borrar_coordinador"),
+    path('detalles/<int:pk>/', CoordinadorDetailView.as_view(),
+         name="detalle_coordinador"),
 ]

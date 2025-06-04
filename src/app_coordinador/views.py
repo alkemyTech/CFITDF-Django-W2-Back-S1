@@ -1,5 +1,8 @@
 from django.shortcuts import render
-from django.views.generic import CreateView, ListView, UpdateView, DeleteView
+from django.views.generic import (
+    CreateView, ListView, UpdateView, 
+    DeleteView, DetailView
+)
 from django.urls import reverse_lazy
 from .models import Coordinador
 
@@ -60,3 +63,21 @@ class CoordinadorDeleteView(DeleteView):
         context = super().get_context_data(**kwargs)
         context["success_url"] = self.success_url
         return context
+    
+class CoordinadorDetailView(DetailView):
+    model = Coordinador
+    template_name = 'details.html'
+    context_object_name = 'objeto'
+
+    def get_queryset(self):
+        return Coordinador.all_objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["model_name"] = "coordinador"
+        context["campos"] = [
+            (field.verbose_name, getattr(self.object, field.name))
+            for field in self.model._meta.fields
+        ]
+        return context
+
