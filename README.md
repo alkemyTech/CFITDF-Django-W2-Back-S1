@@ -1,5 +1,5 @@
 # CoreEventos
-Repositorio Back Squad 1 | Django | CFI TDF 25
+Repositorio Back Squad 1 | Django | CFI TDF 25  
 [Repositorio Front Squad 1 | Django | CFI TDF 25](https://github.com/alkemyTech/CFITDF-Django-W2-Front-S1)
 
 # App de Reservas
