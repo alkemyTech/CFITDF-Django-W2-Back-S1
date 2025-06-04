@@ -1,5 +1,6 @@
-# CFITDF-Django-W2-Back-S1
+# CoreEventos
 Repositorio Back Squad 1 | Django | CFI TDF 25
+[Repositorio Front Squad 1 | Django | CFI TDF 25](https://github.com/alkemyTech/CFITDF-Django-W2-Front-S1)
 
 # App de Reservas
 Aplicación web desarrollada en Django para gestionar la reserva de servicios ofrecidos por una empresa de eventos. El sistema permite registrar servicios, empleados, coordinadores, clientes, y realizar reservas, con funcionalidades de consulta tanto desde la interfaz web como desde una API REST.
