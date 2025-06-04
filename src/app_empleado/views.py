@@ -35,8 +35,11 @@ class EmpleadoListView(ListView):
 
 class EmpleadoUpdateView(UpdateView):
     model = Empleado
-    fields = ['nombre', 'apellido', 'legajo']
+    fields = ['nombre', 'apellido', 'legajo', 'activo']
     template_name = 'update.html'
+
+    def get_queryset(self):
+        return Empleado.all_objects.all()
 
     def get_success_url(self):
         return reverse_lazy('app_empleado:empleado_update',

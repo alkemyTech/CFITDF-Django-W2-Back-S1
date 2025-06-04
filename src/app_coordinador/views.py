@@ -35,8 +35,11 @@ class CoordinadorListView(ListView):
 
 class CoordinadorUpdateView(UpdateView):
     model = Coordinador
-    fields = ['nombre', 'apellido', 'numero_documento']
+    fields = ['nombre', 'apellido', 'numero_documento', 'activo']
     template_name = 'update.html'
+
+    def get_queryset(self):
+        return Coordinador.all_objects.all()
 
     def get_success_url(self):
         return reverse_lazy('app_coordinador:coordinador_update',
