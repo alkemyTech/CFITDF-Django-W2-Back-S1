@@ -46,6 +46,7 @@ class ServicioUpdateView(UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['model_name'] = 'servicio'
+        context["success_url"] = reverse_lazy('app_servicio:servicio_lista')
         return context
 
 

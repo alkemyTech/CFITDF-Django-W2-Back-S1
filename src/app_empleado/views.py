@@ -47,6 +47,7 @@ class EmpleadoUpdateView(UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['model_name'] = 'empleado'
+        context["success_url"] = reverse_lazy('app_empleado:empleado_lista')
         return context
 
 
