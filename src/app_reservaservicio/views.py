@@ -21,24 +21,17 @@ class ReservaServicioCreateView(CreateView):
 
 class ReservaServicioListView(ListView):
     model = ReservaServicio
-    template_name = "lista_generica.html"
-    context_object_name = "objetos"
+    template_name = "listas/reserva_servicio.html"
+    context_object_name = "reservas"
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["titulo"] = "Reservas"
-        context["encabezados_campos"] = [
-            campo.verbose_name for campo in ReservaServicio._meta.fields]
-        context["valores_campos"] = [
-            [getattr(obj, campo.name)
-             for campo in ReservaServicio._meta.fields]
-            for obj in context["objetos"]
-        ]
-        return context
+    def get_queryset(self):
+
+        return ReservaServicio.objects.all()
 
 
 class ReservaServicioUpdateView(UpdateView):
     model = ReservaServicio
+
     fields = ['fecha_evento', 'cliente', 'servicio', 'empleado', 'coordinador']
     template_name = 'update.html'
 

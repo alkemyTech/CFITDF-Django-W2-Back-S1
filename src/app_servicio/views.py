@@ -21,19 +21,14 @@ class ServicioCreateView(CreateView):
 
 class ServicioListView(ListView):
     model = Servicio
-    template_name = "lista_generica.html"
-    context_object_name = "objetos"
+    template_name = "listas/servicio.html"
+    context_object_name = "servicios"
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["titulo"] = "Servicios"
-        context["encabezados_campos"] = [
-            campo.verbose_name for campo in Servicio._meta.fields]
-        context["valores_campos"] = [
-            [getattr(obj, campo.name) for campo in Servicio._meta.fields]
-            for obj in context["objetos"]
-        ]
-        return context
+    def get_queryset(self):
+        show_inactive = self.kwargs.get('show_inactive', False)
+        if show_inactive:
+            return Servicio.all_objects.filter(activo=False)
+        return Servicio.objects.all()
 
 
 class ServicioUpdateView(UpdateView):
@@ -58,7 +53,7 @@ class ServicioUpdateView(UpdateView):
 class ServicioDeleteView(DeleteView):
     model = Servicio
     template_name = "borrado.html"
-    success_url = reverse_lazy("app_servicio:servicio_lista")
+    success_url = reverse_lazy("app_servicio:servicio_lista_activos")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

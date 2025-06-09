@@ -9,7 +9,9 @@ app_name = "app_servicio"
 
 urlpatterns = [
     path('crear/', ServicioCreateView.as_view(), name='servicio_create'),
-    path('', ServicioListView.as_view(), name='servicio_lista'),
+    path('', ServicioListView.as_view(), name='servicio_lista_activos'),
+    path('inactivos/', ServicioListView.as_view(),
+         {'show_inactive': True}, name='servicio_lista_inactivos'),
     path('editar/<int:pk>/', ServicioUpdateView.as_view(),
          name='servicio_update'),
     path('borrar/<int:pk>/', ServicioDeleteView.as_view(),
