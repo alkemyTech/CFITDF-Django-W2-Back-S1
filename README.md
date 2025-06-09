@@ -21,7 +21,7 @@ El sistema busca resolver las siguientes necesidades:
 ### 1. Clonar el repositorio
 ```bash
 # Clonar el repositorio
-git clone "https://github.com/alkemyTech/CFITDF-Django-W2-Back-S1" 
+git clone  --recurse-submodules "https://github.com/alkemyTech/CFITDF-Django-W2-Back-S1" 
 # Ingresar a la carpeta del proyecto
 cd CFITDF-Django-W2-Back-S1
 ```
