@@ -35,29 +35,24 @@ class ClienteUpdateView(UpdateView):
         context = super().get_context_data(**kwargs)
         context['model_name'] = 'cliente'
         return context
-
+    
 
 class ClienteListView(ListView):
     model = Cliente
-    template_name = "lista_generica.html"
-    context_object_name = "objetos"
+    template_name = 'listas/cliente.html'
+    context_object_name = 'clientes'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["titulo"] = "Clientes"
-        context["encabezados_campos"] = [
-            campo.verbose_name for campo in Cliente._meta.fields]
-        context["valores_campos"] = [
-            [getattr(obj, campo.name) for campo in Cliente._meta.fields]
-            for obj in context["objetos"]
-        ]
-        return context
+    def get_queryset(self):
+        show_inactive = self.kwargs.get('show_inactive', False)
+        if show_inactive:
+            return Cliente.all_objects.filter(activo=False)
+        return Cliente.objects.all()
 
 
 class ClienteDeleteView(DeleteView):
     model = Cliente
     template_name = "borrado.html"
-    success_url = reverse_lazy("app_cliente:cliente_lista")
+    success_url = reverse_lazy("app_cliente:cliente_lista_activos")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

@@ -21,19 +21,15 @@ class EmpleadoCreateView(CreateView):
 
 class EmpleadoListView(ListView):
     model = Empleado
-    template_name = "lista_generica.html"
-    context_object_name = "objetos"
+    template_name = "listas/empleado.html"
+    context_object_name = "empleados"
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["titulo"] = "Empleados"
-        context["encabezados_campos"] = [
-            campo.verbose_name for campo in Empleado._meta.fields]
-        context["valores_campos"] = [
-            [getattr(obj, campo.name) for campo in Empleado._meta.fields]
-            for obj in context["objetos"]
-        ]
-        return context
+    def get_queryset(self):
+
+        show_inactive = self.kwargs.get('show_inactive', False)
+        if show_inactive:
+            return Empleado.all_objects.filter(activo=False)
+        return Empleado.objects.all()
 
 
 class EmpleadoUpdateView(UpdateView):
@@ -57,7 +53,7 @@ class EmpleadoUpdateView(UpdateView):
 class EmpleadoDeleteView(DeleteView):
     model = Empleado
     template_name = "borrado.html"
-    success_url = reverse_lazy("app_empleado:empleado_lista")
+    success_url = reverse_lazy("app_empleado:empleado_lista_activos")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
