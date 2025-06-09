@@ -9,7 +9,9 @@ app_name = "app_empleado"
 
 urlpatterns = [
     path('crear/', EmpleadoCreateView.as_view(), name='empleado_create'),
-    path('', EmpleadoListView.as_view(), name='empleado_lista'),
+    path('', EmpleadoListView.as_view(), name='empleado_lista_activos'),
+    path('inactivos/', EmpleadoListView.as_view(),
+         {'show_inactive': True}, name='empleado_lista_inactivos'),
     path('editar/<int:pk>/', EmpleadoUpdateView.as_view(),
          name='empleado_update'),
     path('borrar/<int:pk>/', EmpleadoDeleteView.as_view(),

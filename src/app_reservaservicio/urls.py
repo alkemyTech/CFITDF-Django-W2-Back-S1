@@ -5,7 +5,6 @@ from .views import (
     ReservaServicioDetailView
 )
 
-
 app_name = "app_reservaservicio"
 
 urlpatterns = [
