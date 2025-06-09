@@ -8,7 +8,7 @@ class ServicioManager(models.Manager):
 
 class Servicio(models.Model):
     nombre = models.CharField(max_length=50)
-    descripcion = models.TextField()
+    descripcion = models.TextField(verbose_name="Descripción")
     precio = models.PositiveBigIntegerField()
     activo = models.BooleanField(default=True)
 
@@ -20,4 +20,4 @@ class Servicio(models.Model):
         self.save()
 
     def __str__(self):
-        return f'{self.nombre}: {self.descripcion}, {self.precio}'
+        return f'{self.nombre}: {self.descripcion}, ${self.precio}'

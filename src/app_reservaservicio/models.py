@@ -7,7 +7,7 @@ from app_empleado.models import Empleado
 
 class ReservaServicio(models.Model):
     fecha_reserva = models.DateTimeField(auto_now_add=True)
-    fecha_evento = models.DateTimeField()
+    fecha_evento = models.DateTimeField(verbose_name="Fecha del evento")
 
     cliente = models.ForeignKey(
         Cliente,

@@ -21,7 +21,6 @@ class Empleado(models.Model):
 
     def __str__(self):
         return (
-            f"{self.nombre} {self.apellido} - "
-            f"Legajo: {self.legajo} - "
-            f"Activo: {self.activo}"
+            f"{self.nombre} {self.apellido}, "
+            f"Legajo: {self.legajo}"
         )
