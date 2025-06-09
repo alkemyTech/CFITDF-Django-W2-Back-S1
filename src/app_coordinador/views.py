@@ -51,6 +51,7 @@ class CoordinadorUpdateView(UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['model_name'] = 'coordinador'
+        context["success_url"] = reverse_lazy('app_coordinador:coordinador_lista')
         return context
 
 
