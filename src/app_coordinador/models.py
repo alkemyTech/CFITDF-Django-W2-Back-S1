@@ -9,7 +9,8 @@ class CoordinadorManager(models.Manager):
 class Coordinador(models.Model):
     nombre = models.CharField(max_length=50)
     apellido = models.CharField(max_length=50)
-    numero_documento = models.PositiveIntegerField(unique=True)
+    numero_documento = models.PositiveIntegerField(
+        verbose_name="Número de documento", unique=True)
     fecha_alta = models.DateTimeField(auto_now_add=True)
     activo = models.BooleanField(default=True)
 
@@ -17,7 +18,7 @@ class Coordinador(models.Model):
     all_objects = models.Manager()
 
     def __str__(self):
-        return f"{self.nombre} {self.apellido} - DNI: {self.numero_documento}"
+        return f"{self.nombre} {self.apellido}, DNI: {self.numero_documento}"
 
     class Meta:
         verbose_name = "coordinador"

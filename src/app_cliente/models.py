@@ -19,4 +19,4 @@ class Cliente(models.Model):
         self.save()
 
     def __str__(self):
-        return f'{self.nombre} {self.apellido} - Activo: {self.activo}'
+        return f'{self.nombre} {self.apellido}'
