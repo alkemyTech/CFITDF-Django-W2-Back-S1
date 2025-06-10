@@ -10,5 +10,6 @@ urlpatterns = [
     path('servicios/', include('app_servicio.urls', namespace='app_servicio')),
     path('reservas/', include('app_reservaservicio.urls',
          namespace='app_reservaservicio')),
+    path('api/', include('api.urls')),
     path('', include('homepage.urls')),
 ]
