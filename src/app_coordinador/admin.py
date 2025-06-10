@@ -1,8 +1,8 @@
 from django.contrib import admin
 from .models import Coordinador
+from webapp.admin_site import custom_admin_site
 
-
-@admin.register(Coordinador)
+@admin.register(Coordinador, site=custom_admin_site)
 class CoordinadorAdmin(admin.ModelAdmin):
     list_display = ('nombre', 'apellido', 'numero_documento',
                     'fecha_alta', 'activo')

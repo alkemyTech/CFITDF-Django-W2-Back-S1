@@ -1,8 +1,8 @@
 from django.contrib import admin
 from .models import Empleado
+from webapp.admin_site import custom_admin_site
 
-
-@admin.register(Empleado)
+@admin.register(Empleado, site=custom_admin_site)
 class EmpleadoAdmin(admin.ModelAdmin):
     list_display = ('nombre', 'apellido', 'legajo', 'activo')
     list_filter = ('activo',)

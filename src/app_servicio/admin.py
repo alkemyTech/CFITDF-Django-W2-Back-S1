@@ -1,8 +1,8 @@
 from django.contrib import admin
 from .models import Servicio
+from webapp.admin_site import custom_admin_site
 
-
-@admin.register(Servicio)
+@admin.register(Servicio, site=custom_admin_site)
 class ServicioAdmin(admin.ModelAdmin):
     list_display = ('nombre', 'descripcion', 'precio', 'activo')
     list_filter = ('activo',)
