@@ -3,7 +3,7 @@ from django.views.generic import (
     CreateView, ListView, UpdateView,
     DeleteView, DetailView
 )
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from .models import Coordinador
 
 
@@ -21,15 +21,14 @@ class CoordinadorCreateView(CreateView):
 
 class CoordinadorListView(ListView):
     model = Coordinador
-    template_name = "listas/coordinador.html"  
-    context_object_name = "coordinadores"  
+    template_name = "listas/coordinador.html"
+    context_object_name = "coordinadores"
 
     def get_queryset(self):
-        
         show_inactive = self.kwargs.get('show_inactive', False)
         if show_inactive:
             return Coordinador.all_objects.filter(activo=False)
-        return Coordinador.objects.all() 
+        return Coordinador.objects.all()
 
 
 class CoordinadorUpdateView(UpdateView):
@@ -41,20 +40,24 @@ class CoordinadorUpdateView(UpdateView):
         return Coordinador.all_objects.all()
 
     def get_success_url(self):
-        return reverse_lazy('app_coordinador:coordinador_update',
-                            kwargs={'pk': self.object.pk})
+        next_url = self.request.GET.get('next')
+        default_url = reverse('app_coordinador:coordinador_lista_activos')
+
+        if next_url:
+            return next_url
+        else:
+            return default_url
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['model_name'] = 'coordinador'
-        context["success_url"] = reverse_lazy('app_coordinador:coordinador_lista')
         return context
 
 
 class CoordinadorDeleteView(DeleteView):
     model = Coordinador
     template_name = "borrado.html"
-    success_url = reverse_lazy("app_coordinador:coordinador_lista_activos")  
+    success_url = reverse_lazy("app_coordinador:coordinador_lista_activos")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

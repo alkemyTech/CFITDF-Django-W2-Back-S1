@@ -3,7 +3,7 @@ from django.views.generic import (
     CreateView, UpdateView, ListView,
     DeleteView, DetailView
 )
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from .models import Empleado
 
 
@@ -25,7 +25,6 @@ class EmpleadoListView(ListView):
     context_object_name = "empleados"
 
     def get_queryset(self):
-
         show_inactive = self.kwargs.get('show_inactive', False)
         if show_inactive:
             return Empleado.all_objects.filter(activo=False)
@@ -41,13 +40,17 @@ class EmpleadoUpdateView(UpdateView):
         return Empleado.all_objects.all()
 
     def get_success_url(self):
-        return reverse_lazy('app_empleado:empleado_update',
-                            kwargs={'pk': self.object.pk})
+        next_url = self.request.GET.get('next')
+        default_url = reverse('app_empleado:empleado_lista_activos')
+
+        if next_url:
+            return next_url
+        else:
+            return default_url
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['model_name'] = 'empleado'
-        context["success_url"] = reverse_lazy('app_empleado:empleado_lista')
         return context
 
 

@@ -3,7 +3,7 @@ from django.views.generic import (
     CreateView, ListView, UpdateView,
     DeleteView, DetailView
 )
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from .models import Servicio
 
 
@@ -40,13 +40,17 @@ class ServicioUpdateView(UpdateView):
         return Servicio.all_objects.all()
 
     def get_success_url(self):
-        return reverse_lazy('app_servicio:servicio_update',
-                            kwargs={'pk': self.object.pk})
+        next_url = self.request.GET.get('next')
+        default_url = reverse('app_servicio:servicio_lista_activos')
+
+        if next_url:
+            return next_url
+        else:
+            return default_url
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['model_name'] = 'servicio'
-        context["success_url"] = reverse_lazy('app_servicio:servicio_lista')
         return context
 
 
