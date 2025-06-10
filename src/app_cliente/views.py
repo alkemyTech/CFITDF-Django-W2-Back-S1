@@ -3,7 +3,7 @@ from django.views.generic import (
     CreateView, UpdateView, ListView,
     DeleteView, DetailView
 )
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from .models import Cliente
 
 
@@ -28,13 +28,16 @@ class ClienteUpdateView(UpdateView):
         return Cliente.all_objects.all()
 
     def get_success_url(self):
-        return reverse_lazy('app_cliente:cliente_update',
-                            kwargs={'pk': self.object.pk})
+        next_url = self.request.GET.get('next')
+        default_url = reverse('app_cliente:cliente_lista_activos')
+        if next_url:
+            return next_url
+        else:
+            return default_url
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['model_name'] = 'cliente'
-        context["success_url"] = reverse_lazy('app_cliente:cliente_lista')
         return context
     
 
