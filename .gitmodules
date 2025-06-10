@@ -1,3 +1,3 @@
 [submodule "src/frontend"]
 	path = src/frontend
-	url = https://github.com/alkemyTech/CFITDF-Django-W2-Back-S1.git
+	url = git@github.com:alkemyTech/CFITDF-Django-W2-Front-S1.git
