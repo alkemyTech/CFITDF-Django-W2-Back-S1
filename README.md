@@ -13,6 +13,7 @@ El sistema busca resolver las siguientes necesidades:
 - Permitir a los empleados registrar reservas.
 - Visualizar distintos listados de información.
 - Exponer un endpoint para consultar los servicios disponibles y acceder a su detalle.
+
 ## Requisitos
 - **Python 3.10 o superior**
 - **Git**
@@ -21,7 +22,7 @@ El sistema busca resolver las siguientes necesidades:
 ### 1. Clonar el repositorio
 ```bash
 # Clonar el repositorio
-git clone  --recurse-submodules "https://github.com/alkemyTech/CFITDF-Django-W2-Back-S1" 
+git clone --recurse-submodules "https://github.com/alkemyTech/CFITDF-Django-W2-Back-S1" 
 # Ingresar a la carpeta del proyecto
 cd CFITDF-Django-W2-Back-S1
 ```
@@ -29,8 +30,10 @@ cd CFITDF-Django-W2-Back-S1
 ### 2. Crear y Activar el entorno virtual
 ```bash
 python -m venv venv
+
 # En Windows
 venv\Scripts\activate
+
 # En Linux/Mac
 source venv/bin/activate
 ```
