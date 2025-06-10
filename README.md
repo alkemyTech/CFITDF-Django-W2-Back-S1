@@ -40,15 +40,20 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 4. Crear superusuario
-Para acceder a la interfaz de administración de Django, creá un superusuario: 
+### 4. Aplicar migraciones
 ```bash
-python manage.py createsuperuser
+python src/manage.py migrate
 ```
 
-### 5. Iniciar el servidor
+### 5. Crear superusuario
+Para acceder a la interfaz de administración de Django, creá un superusuario: 
 ```bash
-python manage.py runserver
+python src/manage.py createsuperuser
+```
+
+### 6. Iniciar el servidor
+```bash
+python src/manage.py runserver
 ```
 ## Acceso a la App
 Una vez el servidor esté en ejecución, podes acceder a la aplicación desde:
